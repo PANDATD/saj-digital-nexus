@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="political-hero position-relative overflow-hidden">
+  <div class="political-orbit" aria-hidden="true"></div>
+  <div class="container-xxl position-relative">
+    <p class="eyebrow">Political Media & War Room Operations</p>
+    <div class="row g-5 align-items-end">
+      <div class="col-lg-8"><h1 class="display-page">A disciplined media operation for leadership, public communication and campaign tempo.</h1></div>
+      <div class="col-lg-4"><p class="page-lead">Continuous social management, PR development, podcast production, speech writing, daily creative output and constituency research in one coordinated engagement.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container-xxl">
+    <div class="row g-5">
+      <div class="col-lg-4"><p class="eyebrow">The operating model</p><h2 class="display-section">Narrative, evidence and execution must move together.</h2></div>
+      <div class="col-lg-7 offset-lg-1">
+        <div class="political-pillars">
+          <article class="reveal"><span>01</span><h3>Daily Presence</h3><p>24/7 management of political social handles supported by daily graphics, infographics and a defined publishing rhythm.</p></article>
+          <article class="reveal"><span>02</span><h3>Public Narrative</h3><p>Research-backed speeches, thought-led podcast scripting and media outreach designed around leadership priorities and public initiatives.</p></article>
+          <article class="reveal"><span>03</span><h3>Campaign Creative</h3><p>Ten campaign reels or shorts per month, supported by fast-turn editing and visual communication for constituency activity.</p></article>
+          <article class="reveal"><span>04</span><h3>Constituency Intelligence</h3><p>A curated research pack on local issues and development work to strengthen briefing, content planning and public communication.</p></article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad section-contrast">
+  <div class="container-xxl">
+    <article class="political-package">
+      <div class="row g-5">
+        <div class="col-lg-5">
+          <span class="package-label">{{ political_package.label }}</span>
+          <h2>{{ political_package.name }}</h2>
+          <p>{{ political_package.summary }}</p>
+          <div class="price-block"><strong>{{ political_package.price }}</strong><span>{{ political_package.period }}</span></div>
+          <p class="pricing-note">{{ political_package.note }}</p>
+        </div>
+        <div class="col-lg-6 offset-lg-1">
+          <p class="eyebrow">Monthly scope</p>
+          <ul class="pricing-list list-unstyled">
+            {% for item in political_package.includes %}<li><span aria-hidden="true">✓</span>{{ item }}</li>{% endfor %}
+          </ul>
+          <a href="/contact?package=political-premium" class="btn btn-brand btn-lg mt-3">Discuss Political Media Scope</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container-xxl">
+    <div class="editorial-note"><p class="eyebrow">Built for serious operations</p><blockquote>Political communication is strongest when research, language, design, production and publishing work from the same brief.</blockquote><p>SAJ Digital Nexus structures these capabilities as one connected media workflow rather than isolated deliverables.</p></div>
+  </div>
+</section>
+{% endblock %}

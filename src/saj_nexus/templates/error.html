@@ -1,0 +1,4 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="error-section"><div class="container-xxl"><span class="error-code">{{ code }}</span><p class="eyebrow">Something went off-script</p><h1>{% if code == 404 %}The page you requested does not exist.{% else %}The site encountered an unexpected error.{% endif %}</h1><a href="/" class="btn btn-brand btn-lg">Return Home</a></div></section>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container-xxl">
+    <p class="eyebrow">Services</p>
+    <div class="row g-5 align-items-end">
+      <div class="col-lg-8"><h1 class="display-page">A complete media capability stack, built to work together.</h1></div>
+      <div class="col-lg-4"><p class="page-lead">Strategic writing, cinematic creative, distribution and technology — structured for brands, leaders and media ventures that need serious execution.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="pb-section">
+  <div class="container-xxl">
+    <nav class="service-jump" aria-label="Service categories">
+      {% for group in service_groups %}<a href="#{{ group.slug }}"><span>{{ group.number }}</span>{{ group.short }}</a>{% endfor %}
+    </nav>
+  </div>
+</section>
+
+{% for group in service_groups %}
+<section class="service-section {% if loop.index is even %}section-contrast{% endif %}" id="{{ group.slug }}" aria-labelledby="{{ group.slug }}-heading">
+  <div class="container-xxl">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <span class="service-number">{{ group.number }}</span>
+        <p class="eyebrow">{{ group.short }}</p>
+        <h2 id="{{ group.slug }}-heading" class="display-section">{{ group.title }}</h2>
+        <p class="section-lead mt-4">{{ group.description }}</p>
+      </div>
+      <div class="col-lg-7 offset-lg-1">
+        {% for item in group.items %}
+        <article class="service-item reveal">
+          <span class="service-item-index">{{ "%02d" | format(loop.index) }}</span>
+          <div>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.body }}</p>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endfor %}
+
+<section class="cta-section">
+  <div class="container-xxl"><div class="cta-panel"><p class="eyebrow">Need a custom scope?</p><h2>Mix writing, production, PR and technology around your actual operating needs.</h2><a href="/contact" class="btn btn-light btn-lg">Discuss Your Requirement <span aria-hidden="true">↗</span></a></div></div>
+</section>
+{% endblock %}

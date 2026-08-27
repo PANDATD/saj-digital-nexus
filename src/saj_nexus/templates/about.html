@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container-xxl">
+    <p class="eyebrow">About SAJ Digital Nexus</p>
+    <div class="row g-5 align-items-end"><div class="col-lg-8"><h1 class="display-page">A modern media studio shaped around an old principle: the message and the craft must both matter.</h1></div><div class="col-lg-4"><p class="page-lead">We combine technology, advanced writing, cinematic design, high-end video production and PR strategy under one roof.</p></div></div>
+  </div>
+</section>
+
+<section class="section-pad pt-0">
+  <div class="container-xxl">
+    <div class="about-manifesto row g-5">
+      <div class="col-lg-4"><img src="/assets/images/saj-logo.webp" width="701" height="493" class="about-mark img-fluid" alt="SAJ monogram" loading="lazy"></div>
+      <div class="col-lg-7 offset-lg-1">
+        <p class="eyebrow">Our approach</p>
+        <h2 class="display-section">High-fidelity creative work, grounded in research and connected to distribution.</h2>
+        <p class="about-copy">SAJ Digital Nexus is designed for clients who do not want writing separated from visuals, or creative separated from technology. The source proposition is deliberately broad: scripts, speeches, documentaries, editing, graphics, social media, paid campaigns, SEO, digital PR, podcasts, research, websites and automation.</p>
+        <p class="about-copy">That breadth becomes useful only when it is organised. Our role is to turn the parts into a coherent operating system — one brief, one visual language, one publishing rhythm and a clear commercial scope.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad section-contrast">
+  <div class="container-xxl">
+    <div class="section-heading row g-4 align-items-end"><div class="col-lg-7"><p class="eyebrow">Operating principles</p><h2 class="display-section">Quality is not a single deliverable. It is a repeatable standard.</h2></div></div>
+    <div class="row g-4 mt-4">
+      {% for item in promises %}
+      <div class="col-md-6"><article class="about-principle reveal"><span>0{{ loop.index }}</span><h3>{{ item.title }}</h3><p>{{ item.body }}</p></article></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container-xxl">
+    <p class="eyebrow">What we cover</p>
+    <div class="about-capabilities">
+      {% for group in service_groups %}<a href="/services#{{ group.slug }}"><span>{{ group.number }}</span><strong>{{ group.short }}</strong><em>{{ group.items | length }} capabilities</em></a>{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="cta-section"><div class="container-xxl"><div class="cta-panel"><p class="eyebrow">Bring the brief</p><h2>We will shape the writing, creative and digital system around it.</h2><a href="/contact" class="btn btn-light btn-lg">Start a Conversation <span aria-hidden="true">↗</span></a></div></div></section>
+{% endblock %}

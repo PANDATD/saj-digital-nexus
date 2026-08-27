@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero-section position-relative overflow-hidden">
+  <div class="hero-grid"></div>
+  <img src="/assets/images/saj-logo.webp" alt="" class="hero-watermark" aria-hidden="true" fetchpriority="high">
+  <div class="container-xxl position-relative hero-inner">
+    <div class="row align-items-end g-5">
+      <div class="col-xl-8 col-lg-9">
+        <p class="eyebrow reveal">Digital · Creative · Political Media</p>
+        <h1 class="display-hero reveal">Ideas engineered for attention.<br><span>Systems built for momentum.</span></h1>
+        <p class="hero-copy reveal">SAJ Digital Nexus brings strategic writing, cinematic production, digital PR, podcasting, web development and AI-enabled automation into one high-fidelity media operation.</p>
+        <div class="d-flex flex-wrap gap-3 reveal">
+          <a href="/contact" class="btn btn-brand btn-lg">Start a Project <span aria-hidden="true">↗</span></a>
+          <a href="/services" class="btn btn-outline-light btn-lg">Explore Services</a>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-3 d-none d-lg-block">
+        <div class="hero-index ms-auto reveal">
+          <span class="hero-index-no">04</span>
+          <span class="hero-index-label">Integrated capability groups</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-meta row g-4 reveal">
+      <div class="col-6 col-md-3"><span class="meta-kicker">Narrative</span><strong>Scripts & Speeches</strong></div>
+      <div class="col-6 col-md-3"><span class="meta-kicker">Creative</span><strong>Film & Design</strong></div>
+      <div class="col-6 col-md-3"><span class="meta-kicker">Growth</span><strong>PR & Distribution</strong></div>
+      <div class="col-6 col-md-3"><span class="meta-kicker">Systems</span><strong>Web & Automation</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" aria-labelledby="capabilities-heading">
+  <div class="container-xxl">
+    <div class="section-heading row g-4 align-items-end">
+      <div class="col-lg-7">
+        <p class="eyebrow">Capabilities</p>
+        <h2 id="capabilities-heading" class="display-section">One studio. Four disciplines. A complete media stack.</h2>
+      </div>
+      <div class="col-lg-4 offset-lg-1">
+        <p class="section-lead">From the first line of a script to the final publishing workflow, every layer is designed to work as part of the same system.</p>
+      </div>
+    </div>
+
+    <div class="capability-list mt-5">
+      {% for group in service_groups %}
+      <article class="capability-row reveal" id="{{ group.slug }}">
+        <div class="capability-no">{{ group.number }}</div>
+        <div class="capability-main">
+          <span class="capability-short">{{ group.short }}</span>
+          <h3>{{ group.title }}</h3>
+          <p>{{ group.description }}</p>
+        </div>
+        <div class="capability-link"><a href="/services#{{ group.slug }}" aria-label="Explore {{ group.title }}">Explore <span aria-hidden="true">↗</span></a></div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section-pad section-contrast" aria-labelledby="why-heading">
+  <div class="container-xxl">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <p class="eyebrow">Why SAJ Digital Nexus</p>
+        <h2 id="why-heading" class="display-section sticky-title">Creative craft with operational discipline.</h2>
+      </div>
+      <div class="col-lg-7 offset-lg-1">
+        <div class="promise-grid">
+          {% for item in promises %}
+          <article class="promise-card reveal">
+            <span>{{ loop.index | string | upper }}</span>
+            <p class="eyebrow mb-3">{{ item.eyebrow }}</p>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.body }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" aria-labelledby="packages-heading">
+  <div class="container-xxl">
+    <div class="section-heading row align-items-end g-4">
+      <div class="col-lg-7">
+        <p class="eyebrow">Commercial Packages</p>
+        <h2 id="packages-heading" class="display-section">Clear scopes for recurring media operations.</h2>
+      </div>
+      <div class="col-lg-4 offset-lg-1 text-lg-end">
+        <a href="/pricing" class="text-link">View all pricing <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <div class="row g-4 mt-4">
+      {% for package in packages %}
+      <div class="col-md-6 col-xl-3">
+        <article class="package-card h-100 reveal {% if package.featured %}package-featured{% endif %}">
+          <div class="package-top">
+            <span class="package-number">{{ package.number }}</span>
+            <span class="package-label">{{ package.label }}</span>
+          </div>
+          <h3>{{ package.name }}</h3>
+          <p class="package-summary">{{ package.summary }}</p>
+          <div class="package-price">{{ package.price }}</div>
+          <div class="package-period">{{ package.period }}</div>
+          <a href="/pricing#{{ package.slug }}" class="stretched-link" aria-label="View {{ package.name }} details"></a>
+        </article>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section-pad pt-0" aria-labelledby="process-heading">
+  <div class="container-xxl">
+    <div class="process-shell">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <p class="eyebrow">Working Model</p>
+          <h2 id="process-heading" class="display-section">From brief to distribution.</h2>
+          <p class="section-lead mt-4">A simple operating rhythm keeps research, creative and technology aligned.</p>
+        </div>
+        <div class="col-lg-7 offset-lg-1">
+          {% for number, title, body in process_steps %}
+          <div class="process-row reveal">
+            <span>{{ number }}</span>
+            <h3>{{ title }}</h3>
+            <p>{{ body }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container-xxl">
+    <div class="cta-panel reveal">
+      <p class="eyebrow">Build the next media system</p>
+      <h2>Have a story, campaign, channel or platform that needs sharper execution?</h2>
+      <a href="/contact" class="btn btn-light btn-lg">Start a Project <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</section>
+{% endblock %}

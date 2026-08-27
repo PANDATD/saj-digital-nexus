@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container-xxl">
+    <p class="eyebrow">Packages & Pricing</p>
+    <div class="row g-5 align-items-end">
+      <div class="col-lg-8"><h1 class="display-page">Commercial scopes built for consistent output.</h1></div>
+      <div class="col-lg-4"><p class="page-lead">Published price ranges are in INR and reflect the package structure supplied by SAJ Digital Nexus. Final scope can vary by production complexity and project requirements.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="pb-section">
+  <div class="container-xxl">
+    <div class="row g-4">
+      {% for package in packages %}
+      <div class="col-lg-6" id="{{ package.slug }}">
+        <article class="pricing-card h-100 {% if package.featured %}pricing-featured{% endif %}">
+          <div class="pricing-head d-flex justify-content-between gap-4 align-items-start">
+            <div><span class="package-label">{{ package.label }}</span><h2>{{ package.name }}</h2></div>
+            <span class="pricing-index">{{ package.number }}</span>
+          </div>
+          <p class="package-summary">{{ package.summary }}</p>
+          <div class="price-block"><strong>{{ package.price }}</strong><span>{{ package.period }}</span></div>
+          <ul class="pricing-list list-unstyled">
+            {% for item in package.includes %}<li><span aria-hidden="true">✓</span>{{ item }}</li>{% endfor %}
+          </ul>
+          {% if package.note %}<p class="pricing-note">{{ package.note }}</p>{% endif %}
+          <a href="/contact?package={{ package.slug }}" class="btn {% if package.featured %}btn-brand{% else %}btn-outline-light{% endif %}">Enquire About This Package</a>
+        </article>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section-pad section-contrast" aria-labelledby="alacarte-heading">
+  <div class="container-xxl">
+    <div class="row g-5">
+      <div class="col-lg-4"><p class="eyebrow">A-La-Carte</p><h2 id="alacarte-heading" class="display-section">Individual service rates.</h2><p class="section-lead mt-4">Useful for one-off assignments, pilots or work that sits outside a retainer.</p></div>
+      <div class="col-lg-7 offset-lg-1">
+        <div class="rate-list">
+          {% for name, price, unit in a_la_carte %}
+          <div class="rate-row reveal"><div><h3>{{ name }}</h3><span>{{ unit }}</span></div><strong>{{ price }}</strong></div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container-xxl"><div class="cta-panel"><p class="eyebrow">Scope before spend</p><h2>Choose a published package or build a custom engagement around the work you actually need.</h2><a href="/contact" class="btn btn-light btn-lg">Request a Project Scope <span aria-hidden="true">↗</span></a></div></div>
+</section>
+{% endblock %}

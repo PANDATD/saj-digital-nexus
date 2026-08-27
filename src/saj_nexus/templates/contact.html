@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero contact-hero">
+  <div class="container-xxl">
+    <p class="eyebrow">Start a Project</p>
+    <div class="row g-5 align-items-end"><div class="col-lg-7"><h1 class="display-page">Tell us what you are building, publishing or trying to scale.</h1></div><div class="col-lg-4 offset-lg-1"><p class="page-lead">Share the objective, platform and expected scope. We can shape the right combination of writing, production, PR, web and automation.</p></div></div>
+  </div>
+</section>
+
+<section class="pb-section">
+  <div class="container-xxl">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="contact-aside">
+          <p class="eyebrow">Project fit</p>
+          <h2>Useful details to include.</h2>
+          <ul class="list-unstyled contact-points">
+            <li><span>01</span><div><strong>Objective</strong><p>What outcome should the work support?</p></div></li>
+            <li><span>02</span><div><strong>Channels</strong><p>Social, YouTube, podcast, web, print or multi-platform?</p></div></li>
+            <li><span>03</span><div><strong>Volume</strong><p>One-off assignment, launch project or monthly operation?</p></div></li>
+            <li><span>04</span><div><strong>Timeline</strong><p>When do you need the first deliverables live?</p></div></li>
+          </ul>
+          {% if contact_email %}<a href="mailto:{{ contact_email }}" class="text-link">{{ contact_email }}</a>{% endif %}
+        </div>
+      </div>
+      <div class="col-lg-7 offset-lg-1">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% for category, message in messages %}<div class="alert alert-success" role="status">{{ message }}</div>{% endfor %}
+        {% endwith %}
+        {% if errors.form %}<div class="alert alert-danger" role="alert">{{ errors.form }}</div>{% endif %}
+        <form method="post" action="/contact" class="project-form" novalidate>
+          <input type="hidden" name="csrf_token" value="{{ token }}">
+          <div class="hp-field" aria-hidden="true"><label for="website">Website</label><input id="website" type="text" name="website" tabindex="-1" autocomplete="off"></div>
+          <div class="row g-4">
+            <div class="col-md-6"><label class="form-label" for="name">Name *</label><input class="form-control{% if errors.name %} is-invalid{% endif %}" id="name" name="name" value="{{ values.get('name','') }}" required autocomplete="name">{% if errors.name %}<div class="invalid-feedback">{{ errors.name }}</div>{% endif %}</div>
+            <div class="col-md-6"><label class="form-label" for="organization">Organisation</label><input class="form-control" id="organization" name="organization" value="{{ values.get('organization','') }}" autocomplete="organization"></div>
+            <div class="col-md-6"><label class="form-label" for="email">Email *</label><input class="form-control{% if errors.email %} is-invalid{% endif %}" id="email" type="email" name="email" value="{{ values.get('email','') }}" required autocomplete="email">{% if errors.email %}<div class="invalid-feedback">{{ errors.email }}</div>{% endif %}</div>
+            <div class="col-md-6"><label class="form-label" for="phone">Phone</label><input class="form-control" id="phone" type="tel" name="phone" value="{{ values.get('phone','') }}" autocomplete="tel"></div>
+            <div class="col-md-6"><label class="form-label" for="service">Service / Package</label><select class="form-select" id="service" name="service"><option value="">Select if relevant</option>{% for package in packages %}<option value="{{ package.name }}"{% if values.get('service') == package.name %} selected{% endif %}>{{ package.name }}</option>{% endfor %}<option value="Custom Scope"{% if values.get('service') == 'Custom Scope' %} selected{% endif %}>Custom Scope</option></select></div>
+            <div class="col-md-6"><label class="form-label" for="budget">Indicative Budget</label><select class="form-select" id="budget" name="budget"><option value="">Prefer not to say</option>{% for value in ['Under ₹25,000','₹25,000 – ₹50,000','₹50,000 – ₹1,00,000','₹1,00,000 – ₹2,00,000','₹2,00,000+'] %}<option{% if values.get('budget') == value %} selected{% endif %}>{{ value }}</option>{% endfor %}</select></div>
+            <div class="col-12"><label class="form-label" for="message">Project Brief *</label><textarea class="form-control{% if errors.message %} is-invalid{% endif %}" id="message" name="message" rows="6" required placeholder="What are you building, what channels matter, and what should the work achieve?">{{ values.get('message','') }}</textarea>{% if errors.message %}<div class="invalid-feedback">{{ errors.message }}</div>{% endif %}</div>
+            <div class="col-12 d-flex flex-column flex-sm-row gap-3 align-items-sm-center"><button type="submit" class="btn btn-brand btn-lg">Send Enquiry <span aria-hidden="true">↗</span></button><small class="form-note">Your message is not stored by this website; valid submissions are forwarded to the configured contact workflow.</small></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
