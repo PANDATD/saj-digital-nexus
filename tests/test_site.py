@@ -28,6 +28,26 @@ def test_public_pages_render(client, path, needle):
     assert b'<link rel="canonical"' in response.data
 
 
+def test_service_groups_render_child_services(client):
+    """Regression: dict key `items` must not resolve to dict.items in Jinja."""
+    services = client.get("/services")
+    assert services.status_code == 200
+    assert (
+        b"Reels, Shorts &amp; Advertising Scripts" in services.data
+        or b"Reels, Shorts & Advertising Scripts" in services.data
+    )
+    assert (
+        b"E-commerce, LMS &amp; Chatbot Automation" in services.data
+        or b"E-commerce, LMS & Chatbot Automation" in services.data
+    )
+
+    about = client.get("/about")
+    assert about.status_code == 200
+    assert b"4 capabilities" in about.data
+    assert b"6 capabilities" in about.data
+    assert b"3 capabilities" in about.data
+
+
 def test_assets_are_served_locally(client):
     response = client.get("/assets/css/site.css")
     assert response.status_code == 200

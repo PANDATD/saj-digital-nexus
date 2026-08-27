@@ -36,7 +36,7 @@
   <div class="container-xxl">
     <p class="eyebrow">What we cover</p>
     <div class="about-capabilities">
-      {% for group in service_groups %}<a href="/services#{{ group.slug }}"><span>{{ group.number }}</span><strong>{{ group.short }}</strong><em>{{ group.items | length }} capabilities</em></a>{% endfor %}
+      {% for group in service_groups %}<a href="/services#{{ group.slug }}"><span>{{ group.number }}</span><strong>{{ group.short }}</strong><em>{{ group["items"] | length }} capabilities</em></a>{% endfor %}
     </div>
   </div>
 </section>
